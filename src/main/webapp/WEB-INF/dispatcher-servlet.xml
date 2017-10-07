@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+       http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-3.0.xsd" >
+
+<!--        <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+        <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>-->
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ecom.annotation.controller"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings"><!--or You can use urlMap this is map and former is properties-->
+            <props>
+                <prop key="index.htm">indexController</prop>
+                <prop key="authorize.htm">validateUserController</prop>
+                <prop key="*t.htm">categoryController</prop>
+                <prop key="*p.htm">productController</prop>
+                <prop key="getvalue.htm">variableController</prop>
+                <prop key="test.htm">testController</prop>
+                <prop key="carthandler.htm">cartController</prop>
+                <prop key="insert.htm">insertController</prop>
+                <prop key="homesearch.htm">homeSearchController</prop>
+                <prop key="checkout.htm">checkoutController</prop>
+                <prop key="userregister.htm">userRegistrationController</prop>
+                <prop key="guestregister.htm">guestRegistrationController</prop>
+                <prop key="purchase.htm">purchaseController</prop>
+                <prop key="reviewcart.htm">reviewcartController</prop>
+                <prop key="search.htm">backeEndSearchController</prop>
+                <prop key="ajax-call.htm">ajaxController</prop>
+                <prop key="remove-item.htm">removeCartItemController</prop>
+                <prop key="pay-res.htm">paymentResponseController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="categoryController" class="com.ecom.controller.CategoryController"/>
+    <bean id="productController" class="com.ecom.controller.ProductController"/>
+    <bean id="variableController" class="com.ecom.controller.VariableController"/>
+    <bean id="testController" class="com.ecom.controller.TestController"/>
+    <bean id="cartController" class="com.ecom.controller.CartHandler"/>
+    <bean id="insertController" class="web.cms.InsertController"/>
+    <bean id="homeSearchController" class="com.ecom.controller.HomeSearchController"/>
+    <bean id="checkoutController" class="com.ecom.controller.CheckoutHandler"/>
+    <bean id="userRegistrationController" class="com.ecom.controller.UserRegistrationController"/>
+    <bean id="guestRegistrationController" class="com.ecom.controller.GuestRegistrationController"/>
+    <bean id="purchaseController" class="com.ecom.controller.PurchaseController"/>
+    <bean id="reviewcartController" class="com.ecom.controller.ReviewCartController"/>
+    <bean id="backeEndSearchController" class="web.cms.SearchController"/>
+    <bean id="validateUserController" class="com.ecom.controller.ValidateUserController"/>
+    <bean id="ajaxController" class="com.ecom.controller.AjaxController"/>
+    <bean id="removeCartItemController" class="com.ecom.controller.RemoveCartItemController"/>
+    <bean id="paymentResponseController" class="payment.controller.PaymentResponseController"/>
+    
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+              
+    <bean name="indexController"
+          class="com.ecom.controller.IndexController"
+          p:viewName="index" />
+    </beans>
+    

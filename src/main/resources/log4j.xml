@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<appender name="ecomLog" class="org.apache.log4j.rolling.RollingFileAppender">
+		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+			<param name="FileNamePattern" value="/var/lib/openshift/5554cf47fcf9333135000186/app-root/data/appLogs/ecom_%d.log" />
+		</rollingPolicy>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%t] %C ${pom.version} (%F:%L) - %m%n" />
+		</layout>
+	</appender>
+	<!-- <logger name="org.springframework">
+		<level value="OFF" />
+	</logger> -->
+	<root>
+		<level value="INFO" />
+		<appender-ref ref="ecomLog" />
+		<!-- <appender-ref ref="org.springframework" /> -->
+	</root>
+
+</log4j:configuration>
